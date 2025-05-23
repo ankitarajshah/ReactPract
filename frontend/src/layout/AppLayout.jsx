@@ -21,7 +21,7 @@ const userRoles = ["user"];
 const AppLayout = () => {
   const [sidebarLeftOpen, setSidebarLeftOpen] = useState(false);
   const [sidebarRightOpen, setSidebarRightOpen] = useState(false);
-  const [searchText, setSearchText] = useState("");
+
   const navBarItems = [
     { to: "/", label: "Home", icon: Home },
     { to: "/restaurant", label: "Restaurant" },
@@ -58,7 +58,6 @@ const AppLayout = () => {
           console.log("User icon clicked");
           setSidebarRightOpen((prev) => !prev);
         }}
-        onSearchChange={(text) => setSearchText(text)}
       />
 
       {/* Left Sidebar toggle button: Visible on mobile only */}
@@ -92,9 +91,9 @@ const AppLayout = () => {
 
       {/* Main Content */}
       <main className="pt-16 p-6 bg-gray-50 min-h-screen">
-        <Outlet context={{ searchText }} />
+        <Outlet />
       </main>
-      <Footer />
+      <Footer/>
     </>
   );
 };
