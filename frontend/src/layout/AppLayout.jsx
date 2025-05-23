@@ -14,6 +14,7 @@ import {
   Menu,
   X,
 } from "lucide-react";
+import Footer from "../pages/Footer";
 
 const userRoles = ["user"];
 
@@ -92,6 +93,7 @@ const AppLayout = () => {
       <main className="pt-16 p-6 bg-gray-50 min-h-screen">
         <Outlet />
       </main>
+      <Footer/>
     </>
   );
 };
