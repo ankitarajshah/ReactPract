@@ -1,0 +1,17 @@
+{
+  "id": "750559",
+  "imageId": "MERCHANDISING_BANNERS/IMAGES/MERCH/2024/7/2/8f508de7-e0ac-4ba8-b54d-def9db98959e_Vada Pav.png",
+  "action": {
+    "link": "https://www.swiggy.com/collections/80417?collection_id=80417&tags=layout_BAU_Contextual%2Cvada_pav&type=rcv2",
+    "text": "Vada Pav",
+    "type": "WEBLINK"
+  },
+  "entityType": "BANNER",
+  "accessibility": {
+    "altText": "restaurants curated for vada pav",
+    "altTextCta": "open"
+  },
+  "entityId": "80417",
+  "frequencyCapping": {},
+  "externalMarketing": {}
+}
