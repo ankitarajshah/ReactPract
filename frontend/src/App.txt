@@ -1,0 +1,42 @@
+import React, { useEffect, useState } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import SignIn from "./pages/SignIn";
+import Home from "./pages/Home";
+import ProtectedRoute from "./route/ProtectedRoute";
+import About from "./pages/About";
+const App = () => {
+  const [isAuth, setIsAuth] = useState(false);
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      setIsAuth(true);
+    } else {
+      setIsAuth(false);
+    }
+  }, []);
+
+  const router = createBrowserRouter([
+    {
+      path: "/signin",
+      element: <SignIn />,
+    },
+    {
+      path: "/",
+      element: <ProtectedRoute />,
+      children: [
+        {
+          index: true,
+          element: <Home />,
+        },
+        {
+          path: "about",
+          element: <About />,
+        },
+      ],
+    },
+  ]);
+  return <RouterProvider router={router} />;
+};
+
+export default App;
