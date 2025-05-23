@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import RestaurantCard from "../components/RestaurantCard";
+import { useSearchParams } from "react-router-dom";
 
 const swiggyApi = import.meta.env.VITE_SWIGGY_API;
 const RestaurantList = () => {
