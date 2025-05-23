@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import RestaurantCard from "../components/RestaurantCard";
-
+import { useOutletContext } from "react-router-dom";
 const swiggyApi = import.meta.env.VITE_SWIGGY_API;
 const RestaurantList = () => {
   const [restaurants, setRestaurants] = useState([]);
+  const { searchText } = useOutletContext(); // 👈 Use search from context
 
   useEffect(() => {
     fetch(swiggyApi)
@@ -18,7 +19,9 @@ const RestaurantList = () => {
       })
       .catch((err) => console.error("Error fetching restaurants:", err));
   }, []);
-
+  const filteredRestaurants = restaurants.filter((r) =>
+    r.info.name.toLowerCase().includes(searchText.toLowerCase())
+  );
   return (
     <div>
       <h2 className="text-2xl font-bold text-center my-6">
@@ -28,7 +31,7 @@ const RestaurantList = () => {
         <p className="text-center">Loading...</p>
       ) : (
         <div className="flex flex-wrap justify-center">
-          {restaurants.map((restaurant, index) => (
+          {filteredRestaurants.map((restaurant, index) => (
             <RestaurantCard
               key={`${restaurant.info.id}-${index}`}
               restaurant={restaurant}
@@ -42,52 +45,3 @@ const RestaurantList = () => {
 
 export default RestaurantList;
 
-// import React, { useEffect, useState } from "react";
-
-// const swiggyApi = import.meta.env.VITE_SWIGGY_API;
-// const imageBaseUrl = import.meta.env.VITE_SWIGGY_IMAGE_BASE;
-
-// const RestaurantList = () => {
-//   const [restaurants, setRestaurants] = useState([]);
-
-//   useEffect(() => {
-//     fetch(swiggyApi)
-//       .then((res) => res.json())
-//       .then((data) => {
-//         const cards = data?.data?.cards || [];
-//         const restaurantCards = cards.flatMap(
-//           (card) =>
-//             card?.card?.card?.gridElements?.infoWithStyle?.restaurants || []
-//         );
-//         setRestaurants(restaurantCards);
-//       })
-//       .catch((err) => console.error("Error fetching restaurants:", err));
-//   }, []);
-
-//   return (
-//     <div>
-//       <h2>Restaurants Near You</h2>
-//       {restaurants.length === 0 ? (
-//         <p>Loading...</p>
-//       ) : (
-//         <ul>
-//           {restaurants.map((restaurant, index) => (
-//             <li key={`${restaurant.info.id}-${index}`}>
-//               <strong>{restaurant.info.name}</strong> –{" "}
-//               {restaurant.info.cuisines.join(", ")}
-//               <div>
-//                 <img
-//                   src={`${imageBaseUrl}${restaurant.info.cloudinaryImageId}`}
-//                   alt={restaurant.info.name}
-//                   width="200"
-//                 />
-//               </div>
-//             </li>
-//           ))}
-//         </ul>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default RestaurantList;

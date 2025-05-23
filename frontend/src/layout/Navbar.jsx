@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { filterByRole } from "../utils/filterByRole";
 import { User } from "lucide-react";
-const Navbar = ({ items, roles, onProfileClick }) => {
+const Navbar = ({ items, roles, onProfileClick, onSearchChange }) => {
   const filteredItems = filterByRole(items, roles);
 
   return (
@@ -17,6 +17,7 @@ const Navbar = ({ items, roles, onProfileClick }) => {
         type="text"
         placeholder="Search food"
         className="hidden md:block w-1/3 px-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-orange-400"
+        onChange={(e) => onSearchChange(e.target.value)}
       />
       <div className="flex items-center gap-4">
         {/* Other icons if needed */}
