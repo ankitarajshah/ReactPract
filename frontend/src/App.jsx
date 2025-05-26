@@ -1,29 +1,35 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import SignIn from "./pages/SignIn";
 import ErrorPage from "./pages/ErrorPage";
 import HelpPage from "./pages/HelpPage";
-import OffersPage from "./pages/OffersPage";
-import CorporatePage from "./pages/CorporatePage";
-import OtherPage from "./pages/OtherPage";
-import AppLayout from "./layout/AppLayout";
+import OffersPage from "./feature/OffersPage";
+import CorporatePage from "./feature/CorporatePage";
+import OtherPage from "./feature/OtherPage";
+import ResAppLayout from "./components/layout/ResAppLayout";
 import RestaurantList from "./pages/RestaurantList";
+import Checkout from "./pages/Checkout";
+import RestaurantMenu from "./pages/RestaurantMenu";
+import Search from "./pages/Search";
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <AppLayout />,
+    element: <ResAppLayout />,
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <Home /> },
-      { path: "cart", element: <Cart /> },
-      { path: "signin", element: <SignIn /> },
-      { path: "other", element: <OtherPage /> },
-      { path: "help", element: <HelpPage /> },
-      { path: "offers", element: <OffersPage /> },
+      { index: true, element: <RestaurantList /> },
       { path: "corporate", element: <CorporatePage /> },
-      { path: "restaurant", element: <RestaurantList /> },
+      { path: "search", element: <RestaurantList /> },
+      { path: "offers", element: <OffersPage /> },
+      { path: "help", element: <HelpPage /> },
+      { path: "signin", element: <SignIn /> },
+      { path: "cart", element: <Cart /> },
+      { path: "other", element: <OtherPage /> },
+      { path: "offers", element: <OffersPage /> },
+      { path: "checkout", element: <Checkout /> },
+      { path: "restaurant/:id", element: <RestaurantMenu /> },
     ],
   },
 ]);

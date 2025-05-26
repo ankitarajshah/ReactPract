@@ -1,9 +1,10 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 const imageBaseUrl = import.meta.env.VITE_SWIGGY_IMAGE_BASE;
 
 const RestaurantCard = ({ restaurant }) => {
   const {
+    id,
     name,
     cloudinaryImageId,
     locality,
@@ -23,7 +24,9 @@ const RestaurantCard = ({ restaurant }) => {
       />
       <div className="p-4">
         <h3 className="text-lg font-semibold">{name}</h3>
-        <p className="text-sm text-gray-600">{locality}, {areaName}</p>
+        <p className="text-sm text-gray-600">
+          {locality}, {areaName}
+        </p>
         <p className="text-sm mt-1">
           <span className="font-medium">Cuisines:</span> {cuisines.join(", ")}
         </p>
@@ -39,6 +42,12 @@ const RestaurantCard = ({ restaurant }) => {
           </span>
         )}
       </div>
+      <Link
+        to={`/restaurant/${id}`}
+        className="text-blue-600 hover:underline mt-2 inline-block"
+      >
+        View Menu
+      </Link>
     </div>
   );
 };

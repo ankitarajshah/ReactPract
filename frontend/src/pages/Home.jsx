@@ -1,5 +1,5 @@
 import React from "react";
-import BannerList from "../components/BannerList";
+import BannerList from "../components/common/BannerList";
 
 const Home = () => {
   return (

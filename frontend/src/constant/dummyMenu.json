@@ -1,0 +1,96 @@
+[
+  {
+    "id": "1001",
+    "name": "Margherita Pizza",
+    "category": "Pizzas",
+    "description": "Classic cheese pizza with fresh tomatoes and basil.",
+    "imageUrl": "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/uzfjxybyoywjnldxtnyy",
+    "price": 19900,
+    "isVeg": 1,
+    "ratings": {
+      "rating": "4.5",
+      "ratingCount": "120 ratings"
+    },
+    "offerTags": [
+      {
+        "title": "20% OFF",
+        "subTitle": "USE PIZZA20",
+        "textColor": "#DB6742",
+        "backgroundColor": "#FAE8E3"
+      }
+    ]
+  },
+  {
+    "id": "1002",
+    "name": "Pepperoni Pizza",
+    "category": "Pizzas",
+    "description": "Spicy pepperoni and cheese loaded on a crisp crust.",
+    "imageUrl": "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/twyz6blcau2sqf6huqtv",
+    "price": 24900,
+    "isVeg": 0,
+    "ratings": {
+      "rating": "4.7",
+      "ratingCount": "90 ratings"
+    }
+  },
+  {
+    "id": "2001",
+    "name": "Veg Burger",
+    "category": "Burgers",
+    "description": "Crispy veggie patty with fresh lettuce and tomato.",
+    "imageUrl": "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/y59fz2u4sfztm1v2ynoy",
+    "price": 9900,
+    "isVeg": 1,
+    "ratings": {
+      "rating": "4.2",
+      "ratingCount": "150 ratings"
+    }
+  },
+  {
+    "id": "2002",
+    "name": "Chicken Whopper",
+    "category": "Burgers",
+    "description": "Grilled chicken patty with smoky sauce and veggies.",
+    "imageUrl": "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/sx0w5mwkfbwgbivfnr8t",
+    "price": 12900,
+    "isVeg": 0,
+    "ratings": {
+      "rating": "4.4",
+      "ratingCount": "80 ratings"
+    }
+  },
+  {
+    "id": "3001",
+    "name": "Coke (500ml)",
+    "category": "Drinks",
+    "description": "Chilled Coca-Cola to refresh your mood.",
+    "imageUrl": "https://images.unsplash.com/photo-1562440499-1e26b4b1d1db?auto=format&fit=crop&w=508&q=80",
+    "price": 4000,
+    "isVeg": 1,
+    "ratings": {
+      "rating": "4.6",
+      "ratingCount": "50 ratings"
+    }
+  },
+  {
+    "id": "4001",
+    "name": "Chocolate Brownie Sundae",
+    "category": "Desserts",
+    "description": "Chocolate brownie topped with vanilla ice cream and hot fudge.",
+    "imageUrl": "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/6e00a57c6d8ceff6812a765c80e9ce74",
+    "price": 13900,
+    "isVeg": 1,
+    "ratings": {
+      "rating": "4.8",
+      "ratingCount": "65 ratings"
+    },
+    "offerTags": [
+      {
+        "title": "10% OFF",
+        "subTitle": "USE SWEET10",
+        "textColor": "#9055A2",
+        "backgroundColor": "#F9E1FF"
+      }
+    ]
+  }
+]

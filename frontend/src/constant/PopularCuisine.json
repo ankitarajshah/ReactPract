@@ -1,0 +1,62 @@
+{
+    "data": {
+      "cards": [
+        {
+          "card": {
+            "card": {
+              "@type": "type.googleapis.com/swiggy.gandalf.widgets.v2.GridWidget",
+              "header": {
+                "title": "Popular Cuisines",
+                "subtitle": "What's trending in your area"
+              },
+              "gridElements": {
+                "infoWithStyle": {
+                  "@type": "type.googleapis.com/swiggy.presentation.food.v2.GridElementInfoWithStyle",
+                  "restaurants": [],
+                  "info": [
+                    {
+                      "id": "1",
+                      "name": "Italian",
+                      "imageId": "img_italian",
+                      "action": {
+                        "link": "/search?query=italian",
+                        "text": "Italian"
+                      }
+                    },
+                    {
+                      "id": "2",
+                      "name": "Chinese",
+                      "imageId": "img_chinese",
+                      "action": {
+                        "link": "/search?query=chinese",
+                        "text": "Chinese"
+                      }
+                    },
+                    {
+                      "id": "3",
+                      "name": "South Indian",
+                      "imageId": "img_south_indian",
+                      "action": {
+                        "link": "/search?query=south+indian",
+                        "text": "South Indian"
+                      }
+                    },
+                    {
+                      "id": "4",
+                      "name": "Mexican",
+                      "imageId": "img_mexican",
+                      "action": {
+                        "link": "/search?query=mexican",
+                        "text": "Mexican"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+  

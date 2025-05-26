@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { filterByRole } from "../utils/filterByRole";
+import { filterByRole } from "../../utils/filterByRole";
 
 const SidebarLeft = ({ items, roles, sidebarLeftOpen, setSidebarLeftOpen }) => {
   const filteredItems = filterByRole(items, roles);

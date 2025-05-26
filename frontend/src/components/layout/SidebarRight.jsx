@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { X } from "lucide-react";
-import { filterByRole } from "../utils/filterByRole";
+import { filterByRole } from "../../utils/filterByRole";
 
 const SidebarRight = ({
   items,

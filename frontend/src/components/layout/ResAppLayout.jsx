@@ -14,25 +14,24 @@ import {
   Menu,
   X,
 } from "lucide-react";
-import Footer from "../pages/Footer";
+import Footer from "../Footer";
 
 const userRoles = ["user"];
 
-const AppLayout = () => {
+const ResAppLayout = () => {
   const [sidebarLeftOpen, setSidebarLeftOpen] = useState(false);
   const [sidebarRightOpen, setSidebarRightOpen] = useState(false);
 
   const navBarItems = [
-    { to: "/", label: "Home", icon: Home },
-    { to: "/restaurant", label: "Restaurant" },
-    { to: "/other", label: "Other" },
-    { to: "/help", label: "Help", icon: HelpCircle },
-    { to: "/offers", label: "Offers", icon: Percent, badge: "NEW" },
-    { to: "/signin", label: "Sign In" },
+    { to: "corporate", label: "CorporatePage" },
+    { to: "search", label: "Search" },
+    { to: "offers", label: "Offers", icon: Percent, badge: "NEW" },
+    { to: "help", label: "Help", icon: HelpCircle },
+    { to: "signin", label: "Sign In" },
+    { to: "cart", label: "Cart", icon: ShoppingCart, roles: ["user"] },
   ];
 
   const rightNavItems = [
-    { to: "/cart", label: "Cart", icon: ShoppingCart, roles: ["user"] },
     { to: "/profile", label: "Profile", icon: User, roles: ["user", "admin"] },
     { to: "/logout", label: "Logout", icon: LogOut, roles: ["user", "admin"] },
   ];
@@ -93,9 +92,9 @@ const AppLayout = () => {
       <main className="pt-16 p-6 bg-gray-50 min-h-screen">
         <Outlet />
       </main>
-      <Footer/>
+      <Footer />
     </>
   );
 };
 
-export default AppLayout;
+export default ResAppLayout;
