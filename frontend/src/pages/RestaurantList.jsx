@@ -5,53 +5,55 @@ import { useLocation, useSearchParams } from "react-router-dom";
 import SectionHeader from "../components/common/SectionHeader";
 import CustomSwiper from "../components/common/CustomSwiper";
 import BannerCard from "../components/common/BannerCard";
+import useRestaurants from "../hooks/useRestaurants";
 const swiggyApi = import.meta.env.VITE_SWIGGY_API;
 
 const RestaurantList = () => {
-  const [restaurants, setRestaurants] = useState([]);
-  const [mindRes, setMindRes] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [restaurants, setRestaurants] = useState([]);
+  // const [mindRes, setMindRes] = useState([]);
+  // const [listRes, setListRes] = useState([]);
+  // const [loading, setLoading] = useState(true);
+
+  const { restaurants, mindRestaurants, listRestaurants, loading } =
+    useRestaurants();
 
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
-  const [mind, setMind] = useState([]);
-
-  useEffect(() => {
-    setMind(dummyMind);
-  }, []);
+  console.log({ query });
   const location = useLocation();
 
-  useEffect(() => {
-    const fetchRestaurants = async () => {
-      try {
-        const res = await fetch(swiggyApi);
-        const data = await res.json();
-        const cards = data?.data?.cards || [];
-        console.log(cards);
+  // useEffect(() => {
+  //   const fetchRestaurants = async () => {
+  //     try {
+  //       const res = await fetch(swiggyApi);
+  //       const data = await res.json();
+  //       const cards = data?.data?.cards || [];
 
-        const restaurantCards = cards.flatMap(
-          (card) =>
-            card?.card?.card?.gridElements?.infoWithStyle?.restaurants || []
-        );
-        setRestaurants(restaurantCards);
+  //       const restaurantsFromCards = cards.flatMap(
+  //         (card) =>
+  //           card?.card?.card?.gridElements?.infoWithStyle?.restaurants || []
+  //       );
 
-        const mindCards =
-          data?.data?.cards[0]?.card?.card?.imageGridCards?.info;
-        console.log({ mindCards });
-        setMindRes(mindCards);
-      } catch (error) {
-        console.error("Error fetching restaurants:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  //       const mindCards =
+  //         data?.data?.cards[0]?.card?.card?.imageGridCards?.info || [];
 
-    fetchRestaurants();
-  }, []);
+  //       setRestaurants(restaurantsFromCards);
+  //       setMindRes(mindCards);
+  //       setListRes(restaurantsFromCards);
+  //     } catch (error) {
+  //       console.error("Error fetching restaurants:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-  const filteredRestaurant = restaurants.filter((restaurant) =>
+  //   fetchRestaurants();
+  // }, []);
+
+  const filteredRestaurants = listRestaurants.filter((restaurant) =>
     restaurant?.info?.name?.toLowerCase().includes(query.toLowerCase())
   );
+  if (loading) return <p className="text-center py-10">Loading...</p>;
 
   return (
     <div className="max-w-7xl mx-auto px-4">
@@ -63,7 +65,7 @@ const RestaurantList = () => {
       <SectionHeader align="left">What's on your mind?</SectionHeader>
 
       <CustomSwiper
-        items={mindRes}
+        items={mindRestaurants}
         renderItem={(banner) => <BannerCard key={banner.id} banner={banner} />}
       />
 
@@ -74,12 +76,21 @@ const RestaurantList = () => {
       <CustomSwiper
         items={restaurants}
         renderItem={(restaurant) => (
-          <RestaurantCard key={restaurant.id} restaurant={restaurant} />
+          <RestaurantCard key={restaurant.info.id} restaurant={restaurant} />
         )}
       />
-       <SectionHeader align="left">
-       Restaurants with online food delivery in Ahmedabad
+      <SectionHeader align="left">
+        Restaurants with online food delivery in Ahmedabad
       </SectionHeader>
+
+      <div className="flex flex-wrap justify-center gap-2">
+        {(location.pathname === "/search"
+          ? filteredRestaurants
+          : listRestaurants
+        ).map((restaurant) => (
+          <RestaurantCard key={restaurant.info.id} restaurant={restaurant} />
+        ))}
+      </div>
     </div>
   );
 };
