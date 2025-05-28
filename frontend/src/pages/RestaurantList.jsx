@@ -9,6 +9,7 @@ import useRestaurants from "../hooks/useRestaurants";
 import CustomButton from "../components/common/CustomButton";
 import { TextSearch } from "lucide-react";
 import CustomModal from "../components/common/CustomModal";
+import CustomFilter from "../components/common/CustomFilter";
 
 const swiggyApi = import.meta.env.VITE_SWIGGY_API;
 
@@ -92,6 +93,7 @@ const RestaurantList = () => {
       <SectionHeader align="left">
         Restaurants with online food delivery in Ahmedabad
       </SectionHeader>
+
       <CustomButton
         label="Filter"
         variant="outlined"
@@ -104,16 +106,8 @@ const RestaurantList = () => {
       <CustomModal
         open={open}
         onClose={() => setOpen(false)}
-        title="Filter Options"
-        content={
-          <>
-            {filterConfig.sortConfigs.map((fil) => fil.title)} <hr />
-            {filterConfig.facetList.map((fil) => fil.label)}
-            <hr />
-            {filterConfig.facetList.map((fil) => fil.label)}
-            <hr />
-          </>
-        }
+        title="Filter"
+        content={<CustomFilter />}
         actions={
           <>
             <CustomButton onClick={() => setOpen(false)} color="inherit">
