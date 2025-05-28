@@ -6,6 +6,10 @@ import SectionHeader from "../components/common/SectionHeader";
 import CustomSwiper from "../components/common/CustomSwiper";
 import BannerCard from "../components/common/BannerCard";
 import useRestaurants from "../hooks/useRestaurants";
+import CustomButton from "../components/common/CustomButton";
+import { TextSearch } from "lucide-react";
+import CustomModal from "../components/common/CustomModal";
+
 const swiggyApi = import.meta.env.VITE_SWIGGY_API;
 
 const RestaurantList = () => {
@@ -14,14 +18,20 @@ const RestaurantList = () => {
   // const [listRes, setListRes] = useState([]);
   // const [loading, setLoading] = useState(true);
 
-  const { restaurants, mindRestaurants, listRestaurants, loading } =
-    useRestaurants();
+  const {
+    restaurants,
+    mindRestaurants,
+    listRestaurants,
+    loading,
+    filterConfig,
+  } = useRestaurants();
 
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
   console.log({ query });
   const location = useLocation();
 
+  const [open, setOpen] = useState(false);
   // useEffect(() => {
   //   const fetchRestaurants = async () => {
   //     try {
@@ -72,17 +82,55 @@ const RestaurantList = () => {
       <SectionHeader align="left">
         Top restaurant chains in Ahmedabad
       </SectionHeader>
-
       <CustomSwiper
         items={restaurants}
         renderItem={(restaurant) => (
           <RestaurantCard key={restaurant.info.id} restaurant={restaurant} />
         )}
       />
+
       <SectionHeader align="left">
         Restaurants with online food delivery in Ahmedabad
       </SectionHeader>
-
+      <CustomButton
+        label="Filter"
+        variant="outlined"
+        color="secondary"
+        sx={{ margin: "10px" }}
+        onClick={() => setOpen(true)}
+      >
+        <TextSearch />
+      </CustomButton>
+      <CustomModal
+        open={open}
+        onClose={() => setOpen(false)}
+        title="Filter Options"
+        content={
+          <>
+            {filterConfig.sortConfigs.map((fil) => fil.title)} <hr />
+            {filterConfig.facetList.map((fil) => fil.label)}
+            <hr />
+            {filterConfig.facetList.map((fil) => fil.label)}
+            <hr />
+          </>
+        }
+        actions={
+          <>
+            <CustomButton onClick={() => setOpen(false)} color="inherit">
+              Cancel
+            </CustomButton>
+            <CustomButton
+              onClick={() => {
+                alert("Filters applied");
+                setOpen(false);
+              }}
+              variant="contained"
+            >
+              Apply
+            </CustomButton>
+          </>
+        }
+      ></CustomModal>
       <div className="flex flex-wrap justify-center gap-2">
         {(location.pathname === "/search"
           ? filteredRestaurants

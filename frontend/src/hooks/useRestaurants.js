@@ -6,6 +6,7 @@ const useRestaurants = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [mindRestaurants, setMindRestaurants] = useState([]);
   const [listRestaurants, setListRestaurants] = useState([]);
+  const [filterConfig, setFilterConfig] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -24,9 +25,13 @@ const useRestaurants = () => {
         const mindCards =
           data?.data?.cards[0]?.card?.card?.imageGridCards?.info || [];
 
+        const filterCon = data?.data?.cards[3]?.card?.card;
+
+        console.log({ cards, mindCards, listRestaurants, filterCon });
         setRestaurants(restaurantsFromCards);
         setMindRestaurants(mindCards);
         setListRestaurants(restaurantsFromCards);
+        setFilterConfig(filterCon);
       } catch (error) {
         console.error("Error fetching restaurants:", error);
       } finally {
@@ -37,7 +42,13 @@ const useRestaurants = () => {
     fetchRestaurants();
   }, []);
 
-  return { restaurants, mindRestaurants, listRestaurants, loading };
+  return {
+    restaurants,
+    mindRestaurants,
+    listRestaurants,
+    loading,
+    filterConfig,
+  };
 };
 
 export default useRestaurants;
