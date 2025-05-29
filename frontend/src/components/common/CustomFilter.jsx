@@ -26,14 +26,20 @@ const FILTER_SECTIONS = [
   "Cost for two",
 ];
 
-const CustomFilter = () => {
+const CustomFilter = ({
+  filterConfig,
+  selectedSort,
+  onSortChange,
+  selectedDeliveryTime,
+  onDeliveryTimeChange,
+  selectedCuisines,
+  onCuisinesChange,
+  selectedRatings,
+  onRatingsChange,
+}) => {
   const [activeSection, setActiveSection] = useState("Sort");
-  const [selectedSort, setSelectedSort] = useState(null);
-  const [selectedCuisines, setSelectedCuisines] = useState([]);
-  const [selectedDeliveryTime, setSelectedDeliveryTime] = useState(null);
-  const [selectedRatings, setSelectedRatings] = useState([]);
 
-  const { filterConfig } = useRestaurants();
+  // const { filterConfig } = useRestaurants();
 
   const facet = filterConfig?.facetList?.find((f) => f.label === activeSection);
 
@@ -45,7 +51,7 @@ const CustomFilter = () => {
             <FormLabel component="legend">Sort by</FormLabel>
             <RadioGroup
               value={selectedSort}
-              onChange={(e) => setSelectedSort(e.target.value)}
+              onChange={(e) => onSortChange(e.target.value)}
             >
               {filterConfig?.sortConfigs?.length ? (
                 filterConfig.sortConfigs.map((option) => (
@@ -69,7 +75,7 @@ const CustomFilter = () => {
             <FormLabel component="legend">Select Delivery Time</FormLabel>
             <RadioGroup
               value={selectedDeliveryTime}
-              onChange={(e) => setSelectedDeliveryTime(e.target.value)}
+              onChange={(e) => onDeliveryTimeChange(e.target.value)}
             >
               {facet?.facetInfo?.map((option, index) => (
                 <FormControlLabel
@@ -96,7 +102,7 @@ const CustomFilter = () => {
                   const newSelections = isChecked
                     ? selectedRatings.filter((r) => r !== label)
                     : [...selectedRatings, label];
-                  setSelectedRatings(newSelections);
+                  onRatingsChange(newSelections);
                 };
 
                 return (
@@ -135,7 +141,7 @@ const CustomFilter = () => {
                   const newSelections = isChecked
                     ? selectedCuisines.filter((c) => c !== label)
                     : [...selectedCuisines, label];
-                  setSelectedCuisines(newSelections);
+                  onCuisinesChange(newSelections);
                 };
 
                 return (
@@ -160,7 +166,20 @@ const CustomFilter = () => {
             </List>
           </Box>
         );
-
+        case "Veg/Non-Veg":
+          return (
+            <FormControl component="fieldset">
+              <FormLabel component="legend">Select preference</FormLabel>
+              <RadioGroup
+                value={vegNonVeg}
+                onChange={(e) => onVegNonVegChange(e.target.value)}
+              >
+                <FormControlLabel value="veg" control={<Radio />} label="Vegetarian" />
+                <FormControlLabel value="nonveg" control={<Radio />} label="Non-Vegetarian" />
+              </RadioGroup>
+            </FormControl>
+          );
+        
       default:
         return <p>Options for "{activeSection}" not implemented yet.</p>;
     }
