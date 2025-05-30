@@ -3,9 +3,9 @@ import { useNavigate, Link } from "react-router-dom";
 import AuthForm from "../components/common/AuthForm";
 import { Typography } from "@mui/material";
 import axios from "axios";
-import { loginSchema } from "../../schemas/authSchema";
-import { loginFields } from "../../fields/authFields";
-
+import { loginSchema } from "../schemas/authSchema";
+import { loginFields } from "../fields/authFields";
+import { useAuth } from "../context/AuthContext";
 // const loginSchema = z.object({
 //   email: z.string().email("Invalid email"),
 //   password: z.string().min(6, "Password must be at least 6 characters"),
@@ -37,6 +37,7 @@ const SignIn = () => {
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
 
+  const { login } = useAuth();
   const navigate = useNavigate();
   // const handleSubmit = (e) => {
   //   e.preventDefault();
@@ -57,7 +58,9 @@ const SignIn = () => {
       );
       alert("Login successfull");
       console.log(res.data);
-      navigate("/");
+      // localStorage.setItem("user", JSON.stringify(res.data));
+      login(res.data);
+      navigate("/", { replace: true });
     } catch (err) {
       alert(err.response?.data?.error || "Login failed");
     }

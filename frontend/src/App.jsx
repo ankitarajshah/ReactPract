@@ -13,6 +13,7 @@ import ResAppLayout from "./components/layout/ResAppLayout";
 import RestaurantList from "./pages/RestaurantList";
 import Checkout from "./pages/Checkout";
 import RestaurantMenu from "./pages/RestaurantMenu";
+import PrivateRoute from "../src/components/common/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -21,17 +22,23 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <RestaurantList /> },
+      { path: "signin", element: <SignIn /> },
+      { path: "signup", element: <SignUp /> },
+
       { path: "corporate", element: <CorporatePage /> },
       { path: "search", element: <RestaurantList /> },
       { path: "offers", element: <OffersPage /> },
       { path: "help", element: <HelpPage /> },
-      { path: "signin", element: <SignIn /> },
-      { path: "cart", element: <Cart /> },
       { path: "other", element: <OtherPage /> },
-      { path: "offers", element: <OffersPage /> },
-      { path: "checkout", element: <Checkout /> },
+
       { path: "restaurant/:id", element: <RestaurantMenu /> },
-      { path: "signup", element: <SignUp /> },
+      {
+        element: <PrivateRoute />,
+        children: [
+          { path: "cart", element: <Cart /> },
+          { path: "checkout", element: <Checkout /> },
+        ],
+      },
     ],
   },
 ]);

@@ -15,13 +15,13 @@ import {
   X,
 } from "lucide-react";
 import Footer from "../Footer";
-
+import { useAuth } from "../../context/AuthContext";
 const userRoles = ["user"];
 
 const ResAppLayout = () => {
   const [sidebarLeftOpen, setSidebarLeftOpen] = useState(false);
   const [sidebarRightOpen, setSidebarRightOpen] = useState(false);
-
+  const { logout } = useAuth();
   const navBarItems = [
     { to: "corporate", label: "CorporatePage" },
     { to: "search", label: "Search" },
@@ -33,7 +33,12 @@ const ResAppLayout = () => {
 
   const rightNavItems = [
     { to: "/profile", label: "Profile", icon: User, roles: ["user", "admin"] },
-    { to: "/logout", label: "Logout", icon: LogOut, roles: ["user", "admin"] },
+    {
+      label: "Logout",
+      icon: LogOut,
+      roles: ["user", "admin"],
+      action: logout,
+    },
   ];
 
   return (

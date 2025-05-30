@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { X } from "lucide-react";
 import { filterByRole } from "../../utils/filterByRole";
-
+import { useAuth } from "../../context/AuthContext";
+import { Link } from "react-router-dom";
 const SidebarRight = ({
   items,
   roles,
@@ -25,17 +25,33 @@ const SidebarRight = ({
       </button>
 
       <nav className="flex flex-col space-y-2 p-4">
-        {filteredItems.map((item) => (
-          <Link
-            key={item.to}
-            to={item.to}
-            onClick={() => setSidebarRightOpen(false)}
-            className="flex items-center gap-2 p-2 hover:bg-orange-100 rounded"
-          >
-            {item.icon && <item.icon className="w-4 h-4" />}
-            <span>{item.label}</span>
-          </Link>
-        ))}
+        {filteredItems.map((item) => {
+          const isAction = typeof item.action === "function";
+
+          return isAction ? (
+            <button
+              key={item.label}
+              onClick={() => {
+                item.action();
+                setSidebarRightOpen(false);
+              }}
+              className="flex items-center gap-2 p-2 hover:bg-orange-100 rounded w-full text-left"
+            >
+              {item.icon && <item.icon className="w-4 h-4" />}
+              <span>{item.label}</span>
+            </button>
+          ) : (
+            <Link
+              key={item.label}
+              to={item.to}
+              onClick={() => setSidebarRightOpen(false)}
+              className="flex items-center gap-2 p-2 hover:bg-orange-100 rounded"
+            >
+              {item.icon && <item.icon className="w-4 h-4" />}
+              <span>{item.label}</span>
+            </Link>
+          );
+        })}
       </nav>
     </aside>
   );
