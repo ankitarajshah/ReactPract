@@ -2,6 +2,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Cart from "./pages/Cart";
 import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+
 import ErrorPage from "./pages/ErrorPage";
 import HelpPage from "./pages/HelpPage";
 import OffersPage from "./feature/OffersPage";
@@ -11,7 +13,6 @@ import ResAppLayout from "./components/layout/ResAppLayout";
 import RestaurantList from "./pages/RestaurantList";
 import Checkout from "./pages/Checkout";
 import RestaurantMenu from "./pages/RestaurantMenu";
-import Search from "./pages/Search";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
       { path: "offers", element: <OffersPage /> },
       { path: "checkout", element: <Checkout /> },
       { path: "restaurant/:id", element: <RestaurantMenu /> },
+      { path: "signup", element: <SignUp /> },
     ],
   },
 ]);

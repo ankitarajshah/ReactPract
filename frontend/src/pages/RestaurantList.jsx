@@ -11,6 +11,7 @@ import { TextSearch } from "lucide-react";
 import CustomModal from "../components/common/CustomModal";
 import CustomFilter from "../components/common/CustomFilter";
 import FilterChips from "../components/common/FiterChips";
+
 const swiggyApi = import.meta.env.VITE_SWIGGY_API;
 
 const RestaurantList = () => {
