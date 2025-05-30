@@ -2,9 +2,17 @@
 const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
+require("dotenv").config();
+const mongoose = require("mongoose");
 
 const app = express();
+
 app.use(cors()); // Allow all origins
+app.use(express.json());
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("MongoDB connected"));
+app.use("/api/auth", require("./routes/authRoutes"));
 
 app.get("/api/restaurants", async (req, res) => {
   try {
