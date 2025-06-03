@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 const imageBaseUrl = import.meta.env.VITE_SWIGGY_IMAGE_BASE;
-
+import axios from "axios";
 const RestaurantCard = ({ restaurant }) => {
   const {
     id,
@@ -15,9 +15,27 @@ const RestaurantCard = ({ restaurant }) => {
     veg,
     sla,
   } = restaurant.info;
+  const navigate = useNavigate();
+  // const handleClick = () => {
+  //   const city = "ahmedabad"; // You can make this dynamic if needed
+  //   const slugName = name.toLowerCase().replace(/[^a-z0-9]/gi, "").replace(/\s+/g, "-");
+  //   const slugLocality = locality.toLowerCase().replace(/[^a-z0-9]/gi, "").replace(/\s+/g, "-");
+  //   const slugArea = areaName.toLowerCase().replace(/[^a-z0-9]/gi, "").replace(/\s+/g, "-");
+
+  //   const slug = `${slugName}-${slugLocality}-${slugArea}`;
+  //   const url = `/city/${city}/${slug}-rest${id}`;
+  //   navigate(url);
+  // };
+
+  const handleClick = () => {
+    navigate(`/city/ahmedabad/${id}`);
+  };
 
   return (
-    <div className="bg-white shadow-md rounded-xl overflow-hidden w-72 border border-gray-200 ">
+    <div
+      onClick={handleClick}
+      className="bg-white shadow-md rounded-xl overflow-hidden w-72 border border-gray-200 "
+    >
       <img
         src={`${imageBaseUrl}${cloudinaryImageId}`}
         alt={name}

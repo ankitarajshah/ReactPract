@@ -1,33 +1,19 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-
+import React from 'react'
+import { useCart } from '../context/CartContext';
 const Cart = () => {
-  // const items = useSelector((state) => state.cart.items);
-
-  // console.log(items);
-
-  // const dispatch = useDispatch();
-
-  // if (!items || items.length === 0) return <p>Your cart is empty</p>;
-
-  // const total = items.reduce(
-  //   (sum, item) => sum + item.price * item.quantity,
-  //   0
-  // );
-
+  const { cart, removeFromCart, updateQuantity } = useCart();
   return (
-    <>
-      <div>Cart</div>
-      {/* {items.map((item) => (
-        <div key={item.id}>
-          <h4>{item.name}</h4>
-          <p>Quantity: {item.quantity}</p>
-          <p>Price: ${item.price} each</p>
-        </div>
-      ))}
-      <h3>Total: ${total.toFixed(2)}</h3> */}
-    </>
-  );
-};
+    <div>
+    {cart.map((item) => (
+      <div key={item.id}>
+        {item.name} - Quantity: {item.quantity}
+        <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
+        <button onClick={() => updateQuantity(item.id, item.quantity - 1)}>-</button>
+        <button onClick={() => removeFromCart(item.id)}>Remove</button>
+      </div>
+    ))}
+  </div>
+  )
+}
 
-export default Cart;
+export default Cart

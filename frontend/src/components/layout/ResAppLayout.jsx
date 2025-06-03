@@ -16,27 +16,28 @@ import {
 } from "lucide-react";
 import Footer from "../Footer";
 import { useAuth } from "../../context/AuthContext";
-const userRoles = ["user"];
 
 const ResAppLayout = () => {
   const [sidebarLeftOpen, setSidebarLeftOpen] = useState(false);
   const [sidebarRightOpen, setSidebarRightOpen] = useState(false);
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
+  const userRoles = user?.roles || []; // assuming user has roles: ['user'], ['admin'], etc.
+
   const navBarItems = [
     { to: "corporate", label: "CorporatePage" },
     { to: "search", label: "Search" },
     { to: "offers", label: "Offers", icon: Percent, badge: "NEW" },
     { to: "help", label: "Help", icon: HelpCircle },
-    { to: "signin", label: "Sign In" },
+    ...(user ? [] : [{ to: "signin", label: "Sign In" }]),
     { to: "cart", label: "Cart", icon: ShoppingCart, roles: ["user"] },
   ];
 
   const rightNavItems = [
-    { to: "/profile", label: "Profile", icon: User, roles: ["user", "admin"] },
+    { to: "/profile", label: "Profile", icon: User },
     {
       label: "Logout",
       icon: LogOut,
-      roles: ["user", "admin"],
+
       action: logout,
     },
   ];

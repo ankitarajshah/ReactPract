@@ -1,9 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ROLES } from "./context/AuthContext"; // Import ROLES
 
 import Cart from "./pages/Cart";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-
 import ErrorPage from "./pages/ErrorPage";
 import HelpPage from "./pages/HelpPage";
 import OffersPage from "./feature/OffersPage";
@@ -13,7 +13,8 @@ import ResAppLayout from "./components/layout/ResAppLayout";
 import RestaurantList from "./pages/RestaurantList";
 import Checkout from "./pages/Checkout";
 import RestaurantMenu from "./pages/RestaurantMenu";
-import PrivateRoute from "../src/components/common/PrivateRoute";
+import PrivateRoute from "./components/common/PrivateRoute";
+import ForbiddenPage from "./pages/ForbiddenPage";
 
 const router = createBrowserRouter([
   {
@@ -24,19 +25,32 @@ const router = createBrowserRouter([
       { index: true, element: <RestaurantList /> },
       { path: "signin", element: <SignIn /> },
       { path: "signup", element: <SignUp /> },
-
-      { path: "corporate", element: <CorporatePage /> },
-      { path: "search", element: <RestaurantList /> },
-      { path: "offers", element: <OffersPage /> },
-      { path: "help", element: <HelpPage /> },
-      { path: "other", element: <OtherPage /> },
-
-      { path: "restaurant/:id", element: <RestaurantMenu /> },
+      { path: "403", element: <ForbiddenPage /> },
       {
-        element: <PrivateRoute />,
+        path: "city/ahmedabad/:id",
+        element: <RestaurantMenu />,
+      },
+      {
+        element: <PrivateRoute allowedRoles={[ROLES.ADMIN]} />,
+        children: [
+          { path: "corporate", element: <CorporatePage /> },
+          { path: "offers", element: <OffersPage /> },
+        ],
+      },
+      {
+        element: <PrivateRoute allowedRoles={[ROLES.MANAGER]} />,
+        children: [{ path: "other", element: <OtherPage /> }],
+      },
+      {
+        element: <PrivateRoute allowedRoles={[ROLES.SUPER_ADMIN]} />,
+        children: [{ path: "help", element: <HelpPage /> }],
+      },
+      {
+        element: <PrivateRoute allowedRoles={[ROLES.USER, ROLES.ADMIN]} />,
         children: [
           { path: "cart", element: <Cart /> },
           { path: "checkout", element: <Checkout /> },
+          { path: "search", element: <RestaurantList /> },
         ],
       },
     ],
@@ -44,5 +58,9 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+   <RouterProvider router={router} />
+     
+  
+  );
 }

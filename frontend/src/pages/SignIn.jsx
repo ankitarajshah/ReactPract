@@ -6,6 +6,7 @@ import axios from "axios";
 import { loginSchema } from "../schemas/authSchema";
 import { loginFields } from "../fields/authFields";
 import { useAuth } from "../context/AuthContext";
+import { useEffect } from "react";
 // const loginSchema = z.object({
 //   email: z.string().email("Invalid email"),
 //   password: z.string().min(6, "Password must be at least 6 characters"),
@@ -37,7 +38,7 @@ const SignIn = () => {
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
 
-  const { login } = useAuth();
+  const { user, login } = useAuth();
   const navigate = useNavigate();
   // const handleSubmit = (e) => {
   //   e.preventDefault();
@@ -49,7 +50,11 @@ const SignIn = () => {
   //   localStorage.setItem("user", JSON.stringify(dummyUser));
   //   navigate("/");
   // };
-
+  useEffect(() => {
+    if (user) {
+      navigate("/", { replace: true }); // or dashboard
+    }
+  }, [user, navigate]);
   const onSubmit = async (data) => {
     try {
       const res = await axios.post(
